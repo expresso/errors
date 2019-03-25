@@ -1,6 +1,6 @@
 {
   "name": "@expresso/errors",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "@expresso express error handling suite",
   "main": "dist/index.js",
   "scripts": {
