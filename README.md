@@ -25,11 +25,9 @@ Import and use it:
 
 ```ts
 import route from './route'
-import { privKey } from './config'
-import expresso from '@expresso/app'
+import expresso, { IExpressoConfigOptions } from '@expresso/app'
 import server from '@expresso/server'
 import errors from '@expresso/errors'
-import { IExpressoConfigOptions } from '@expresso/app'
 
 interface IAppConfig extends IAuthConfig, IExpressoConfigOptions {}
 
