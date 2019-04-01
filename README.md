@@ -11,7 +11,7 @@
 
 ## how this works
 
-The error middleware will receive all errors from `@expresso/app` (and every other error thrown inside any routes) and it is going to sanitize it to a default response pattern with `message`, `code` and `stack` informations. It'll also catch any unknown error messages and parse it as HTTP 500 error.
+The error middleware will receive all errors from `@expresso/app` (and every other error thrown inside any routes) and it is going to sanitize it to a default response pattern with `message`, `code` and `stack` informations. It'll also catch any unknown error messages and parse them as HTTP 500 errors.
 
 ## Basic usage
 
