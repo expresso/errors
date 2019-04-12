@@ -16,6 +16,8 @@ interface IErrorData {
   additionalProperties?: unknown
 }
 
+type ErrorOutput = { status: number, error: { code: string, message: string, stack?: unknown, data?: unknown } }
+
 type ErrorData = IErrorData | null
 
 /**
@@ -29,7 +31,7 @@ export function factory (environment: string): ErrorRequestHandler {
 
     const code = data && data.code ? data.code : slug(err.output.payload.error, { replacement: '_', lower: true })
 
-    const output: { status: number, error: { code: string, message: string, stack?: unknown, data?: unknown } } = { status, error: { code, message } }
+    const output: ErrorOutput = { status, error: { code, message } }
     if (shouldDisplayErrorStack(environment) && data && data.stack) output.error.stack = data.stack
     if (data && data.additionalProperties) output.error.data = data.additionalProperties
 
