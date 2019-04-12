@@ -8,6 +8,7 @@
   - [Summary](#summary)
   - [How this works](#how-this-works)
   - [Basic usage](#basic-usage)
+  - [Adding additional data](#adding-additional-data)
 
 ## How this works
 
@@ -52,3 +53,15 @@ server.start(appFactory, options)
 ```
 
 The error middleware receives a string declaring the current environment for your application. If this environment is different from `production`, then all the error stack will also be displayed.
+
+## Adding additional data
+
+If you'd like to include more data in the error, pass on a `boom` error with `{ additionalData: yourData }` as second parameter.
+
+Example:
+
+```ts
+if (err instanceof ExternalAPIError) return next(boom.serverUnavailable(err.message, { additionalProperties: err.data }))
+```
+
+This will render the added data to the response

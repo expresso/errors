@@ -12,9 +12,10 @@ const shouldDisplayErrorStack = (environment: string): boolean => {
 
 interface IErrorData {
   code?: string
-  stack?: unknown
-  additionalData?: unknown
+  stack?: unknown,
+  additionalProperties?: unknown
 }
+
 type ErrorData = IErrorData | null
 
 /**
@@ -26,13 +27,11 @@ export function factory (environment: string): ErrorRequestHandler {
   return (err: Boom<ErrorData>, _req: Request, res: Response, _next: NextFunction) => {
     const { message, output: { statusCode: status }, data } = err
 
-    const code = data && data.code
-      ? data.code
-      : slug(err.output.payload.error, { replacement: '_', lower: true })
+    const code = data && data.code ? data.code : slug(err.output.payload.error, { replacement: '_', lower: true })
 
-    const output = shouldDisplayErrorStack(environment) && data && data.stack
-      ? { status, error: { code, message, stack: data.stack }, additionalData: err.data }
-      : { status, error: { code, message }, additionalData: err.data }
+    const output = shouldDisplayErrorStack(environment) && data
+      ? { status, error: { code, message, stack: data.stack, data: data.additionalProperties } }
+      : { status, error: { code, message, data: data!.additionalProperties } }
 
     res.status(status)
       .json(output)
