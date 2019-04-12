@@ -29,9 +29,9 @@ export function factory (environment: string): ErrorRequestHandler {
 
     const code = data && data.code ? data.code : slug(err.output.payload.error, { replacement: '_', lower: true })
 
-    const output = shouldDisplayErrorStack(environment) && data
-      ? { status, error: { code, message, stack: data.stack, data: data.additionalProperties } }
-      : { status, error: { code, message, data: data!.additionalProperties } }
+    const output: { status: number, error: { code: string, message: string, stack?: unknown, data?: unknown } } = { status, error: { code, message } }
+    if (shouldDisplayErrorStack(environment) && data && data.stack) output.error.stack = data.stack
+    if (data && data.additionalProperties) output.error.data = data.additionalProperties
 
     res.status(status)
       .json(output)
