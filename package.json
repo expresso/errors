@@ -9,6 +9,7 @@
     "build:watch": "tsc -w",
     "lint": "tslint --project tsconfig.json",
     "build:clean": "npm run clean && npm run build",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
