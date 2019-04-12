@@ -11,8 +11,9 @@ const shouldDisplayErrorStack = (environment: string): boolean => {
 }
 
 interface IErrorData {
-  code?: string,
+  code?: string
   stack?: unknown
+  additionalData?: unknown
 }
 type ErrorData = IErrorData | null
 
@@ -30,8 +31,8 @@ export function factory (environment: string): ErrorRequestHandler {
       : slug(err.output.payload.error, { replacement: '_', lower: true })
 
     const output = shouldDisplayErrorStack(environment) && data && data.stack
-      ? { status, error: { code, message, stack: data.stack } }
-      : { status, error: { code, message } }
+      ? { status, error: { code, message, stack: data.stack }, additionalData: err.data }
+      : { status, error: { code, message }, additionalData: err.data }
 
     res.status(status)
       .json(output)
