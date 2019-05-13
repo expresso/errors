@@ -4,11 +4,13 @@ import * as _renderer from './renderer'
 import * as _normalizer from './normalizer'
 import { ErrorRequestHandler } from 'express'
 
-export function factory (environment: string): ErrorRequestHandler[] {
+export function factory (environment: string, appName?: string): ErrorRequestHandler[] {
+  const app = appName || process.env.npm_package_name
+
   return [
     _stderr.factory(),
     _normalizer.factory(),
-    _renderer.factory(environment)
+    _renderer.factory(environment, app)
   ]
 }
 
