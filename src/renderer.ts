@@ -16,7 +16,7 @@ interface IErrorData {
   additionalProperties?: unknown
 }
 
-type ErrorOutput = { status: number, error: { code: string, message: string, stack?: unknown, data?: unknown } }
+type ErrorOutput = { app?: string, status: number, error: { code: string, message: string, stack?: unknown, data?: unknown } }
 
 type ErrorData = IErrorData | null
 
@@ -25,13 +25,14 @@ type ErrorData = IErrorData | null
  * @param environment - sugar-env environment string
  * @returns - Error handling middleware
  */
-export function factory (environment: string): ErrorRequestHandler {
+export function factory (environment: string, appName?: string): ErrorRequestHandler {
   return (err: Boom<ErrorData>, _req: Request, res: Response, _next: NextFunction) => {
     const { message, output: { statusCode: status }, data } = err
 
     const code = data && data.code ? data.code : slug(err.output.payload.error, { replacement: '_', lower: true })
-
     const output: ErrorOutput = { status, error: { code, message } }
+
+    if (appName) output.app = appName
     if (shouldDisplayErrorStack(environment) && data && data.stack) output.error.stack = data.stack
     if (data && data.additionalProperties) output.error.data = data.additionalProperties
 
