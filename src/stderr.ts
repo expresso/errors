@@ -6,7 +6,7 @@ import { Request, ErrorRequestHandler } from 'express'
 export function factory (): ErrorRequestHandler {
   return (err: Error, _req: Request, _res: Response, next: NextFunction) => {
     if (!(err instanceof Boom)) {
-      console.error(err)
+      console.error(JSON.stringify(err))
     }
 
     next(err)
