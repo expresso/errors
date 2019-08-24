@@ -19,4 +19,4 @@ export const stderr = _stderr
 export const renderer = _renderer
 export const normalizer = _normalizer
 
-export { factory as errors}
+export { factory as errors }
