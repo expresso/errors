@@ -28,7 +28,7 @@ Import and use it:
 import route from './route'
 import expresso, { IExpressoConfigOptions } from '@expresso/app'
 import server from '@expresso/server'
-import errors from '@expresso/errors'
+import { errors } from '@expresso/errors'
 
 interface IAppConfig extends IAuthConfig, IExpressoConfigOptions {}
 
