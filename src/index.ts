@@ -20,3 +20,4 @@ export const renderer = _renderer
 export const normalizer = _normalizer
 
 export default factory
+export { factory as errors }
