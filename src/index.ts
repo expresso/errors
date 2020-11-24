@@ -1,4 +1,4 @@
-import _boom from 'boom'
+import _boom from '@hapi/boom'
 import * as _stderr from './stderr'
 import * as _renderer from './renderer'
 import * as _normalizer from './normalizer'

@@ -1,4 +1,4 @@
-import Boom from 'boom'
+import { Boom } from '@hapi/boom'
 import slug from 'slug'
 import { Response, Request, NextFunction, ErrorRequestHandler } from 'express'
 
